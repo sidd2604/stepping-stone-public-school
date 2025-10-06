@@ -94,7 +94,7 @@ Every section of the website is designed to be **dynamic** — allowing content 
 
 1. Clone the repository  
    ```bash
-   git clone https://github.com/yourusername/ssps.git
+   git clone https://github.com/sidd2604/stepping-stone-public-school.git
    cd ssps
    ```
 
