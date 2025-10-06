@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsletterController;
 
 // Route::get('/', function () {
 //     return view('layouts.layout');
@@ -35,3 +37,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Route::get('/testing-email', [MailController::class, 'sendEmail'])->name('testing-mail');
+
+
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
+Route::get('/verify-newsletter/{token}', [NewsletterController::class, 'verify'])->name('verify.newsletter');
