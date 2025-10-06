@@ -11,7 +11,7 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $events = Event::latest()->paginate(6);
-        $teachers = Teacher::latest()->take(4)->get();
+        $teachers = Teacher::latest()->get();
         if ($request->ajax()) {
             return view('components.events.eventsList', compact('events'))->render();
         }

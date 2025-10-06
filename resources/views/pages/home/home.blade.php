@@ -10,6 +10,7 @@
             </div>
         </div>
     </section>
-
+    @include('components.home.additionalInfo')
     @include('components.teachers.teachersList')
+    @include('components.home.gallerySection')
 @endsection
