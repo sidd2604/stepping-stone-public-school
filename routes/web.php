@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 // Route::get('/', function () {
 //     return view('layouts.layout');
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\Route;
 
 // Routes for the home page
 // This route will display the home page using the HomeController's index method
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/principalDesk', [PageController::class, 'principalDesk'])->name('pricipalDesk');
 
-
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/all', [EventController::class, 'all'])->name('events.all');
 
 // Routes for the dashboard
 Route::get('/dashboard', function () {

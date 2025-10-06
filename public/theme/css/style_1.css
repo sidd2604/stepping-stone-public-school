@@ -2652,7 +2652,7 @@ header.header-four, header.header-five {
 /*  20. Class Grid Page
 /*----------------------------------------*/
 .breadcrumb-banner-area {
-    background: url("../images/9_2.jpg");
+    background: url(../../assets/images/breadcrumb_image.jpg);
 	background-size:cover;
 	background-position:center top;
 	background-repeat:no-repeat;
@@ -2695,11 +2695,11 @@ header.header-four, header.header-five {
     border-radius: 50%;
     content: "";
     display: inline-block;
-    height: 6px;
+    height: 12px;
     position: absolute;
     right: -18px;
-    top: 11px;
-    width: 6px;
+    top: 8px;
+    width: 12px;
 }
 .breadcrumb > li + li:before {display: none;}
 .class-menu {

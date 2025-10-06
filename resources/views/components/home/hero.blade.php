@@ -2,7 +2,7 @@
     <div class="slider-area slider-three-area">
         <div class="preview-2">
             <div id="nivoslider" class="slides">
-                <img src="{{ asset('theme/images/5.jpg') }}" alt="" title="#slider-1-caption1">
+                <img src="{{ asset('assets/images/NTC.jpg') }}" alt="" title="#slider-1-caption1">
                 <img src="{{ asset('theme/images/5.jpg') }}" alt="" title="#slider-1-caption2">
             </div>
             <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
