@@ -63,12 +63,15 @@
                     <div class="subscribe-container">
                         <p>Subscribe now and receive important newsletter regarding educational materials, new courses,
                             interesting events and much more!</p>
-                        <form action="#">
+                        <form id="newsletterForm">
+                            @csrf
                             <div class="subscribe-form">
-                                <input type="email" name="email" placeholder="Your email here">
+                                <input type="email" name="email" id="newsletterEmail" placeholder="Your email here"
+                                    required>
                                 <button type="submit"><i class="fa fa-send"></i></button>
                             </div>
                         </form>
+                        <div id="newsletterMessage" style="margin-top:10px; font-weight:bold;"></div>
                     </div>
                 </div>
             </div>
@@ -78,7 +81,8 @@
                 <div class="footer-container">
                     <div class="row">
                         <div class="col-lg-6">
-                            <span style="color: #0014fe">Designed And Maintained By <a href="#" style="color: #0014fe; font-weight: bold;">SIDDHARTH SHARMA</a></span>
+                            <span style="color: #0014fe">Designed And Maintained By <a href="#"
+                                    style="color: #0014fe; font-weight: bold;">SIDDHARTH SHARMA</a></span>
                         </div>
                         <div class="col-lg-6">
                             <div class="social-links">
@@ -96,3 +100,39 @@
     </div>
 </div>
 <!--End of Footer Area-->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#newsletterForm').on('submit', function (e) {
+        e.preventDefault();
+        var email = $('#newsletterEmail').val();
+        var msgBox = $('#newsletterMessage');
+
+        msgBox.text('Sending...').css('color', 'blue');
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '{{ route("subscribe") }}',
+            method: 'POST',
+            data: {
+                email: email
+            },
+            success: function (response) {
+                if (response.success) {
+                    msgBox.text(response.message).css('color', 'green');
+                    $('#newsletterEmail').val('');
+                }
+            },
+            error: function (xhr) {
+                let msg = xhr.responseJSON?.message || 'Something went wrong.';
+                msgBox.text(msg).css('color', 'red');
+            }
+        });
+    });
+</script>
