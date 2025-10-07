@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $user = User::where('email', $request->email)->first();
+
+        // If user not found or invalid email
+        if (! $user) {
+            return back()->withErrors(['email' => 'These credentials do not match our records.']);
+        }
+
+        // If user exists but not approved
+        if ($user->status !== 'approved') {
+            return back()->withErrors([
+                'email' => 'Your account is not yet approved by the super admin.',
+            ]);
+        }
+
+        // Try authenticating now (only if approved)
         $request->authenticate();
 
         $request->session()->regenerate();

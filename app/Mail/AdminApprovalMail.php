@@ -2,52 +2,56 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeEmail extends Mailable
+class AdminApprovalMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject;
-    public $body;
+    public $admin;
+
+    public $approveUrl;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($message, $subject)
+    public function __construct(User $admin)
     {
-        $this->subject = $subject;
-        $this->body = $message;
+        $this->admin = $admin;
+        $this->approveUrl = url('/approve-admin/'.$admin->approval_token);
     }
 
     /**
-     * Get the message envelope.
+     * Define the message envelope.
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: 'New Admin Registration Request',
         );
     }
 
     /**
-     * Get the message content definition.
+     * Define the message content.
      */
     public function content(): Content
     {
         return new Content(
-            view: 'emailViewPage',
+            view: 'pages.email.adminApproval',
+            with: [
+                'admin' => $this->admin,
+                'approveUrl' => $this->approveUrl,
+            ],
         );
     }
 
     /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * Attachments (optional)
      */
     public function attachments(): array
     {
