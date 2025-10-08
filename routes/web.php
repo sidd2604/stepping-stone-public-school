@@ -55,7 +55,7 @@ Route::get('/verify-newsletter/{token}', [NewsletterController::class, 'verify']
 // Route::get('/admin/approve/{token}', [EmailController::class, 'approveAdmin']);
 
 // needs to be protected using middleware
-Route::get('/admin/status', [AdminController::class, 'statusPage'])->name('admin.status');
+// Route::get('/admin/status', [AdminController::class, 'statusPage'])->name('admin.status');
 
 Route::get('/approve-admin/{token}', [AdminApprovalController::class, 'approve'])
     ->name('approve.admin');
